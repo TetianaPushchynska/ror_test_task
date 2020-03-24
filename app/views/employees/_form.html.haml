@@ -1,0 +1,13 @@
+= form_for @employee do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control'
+  .form-group
+    = f.label :department_id
+    = f.collection_select :department_id, Department.order(:name), :id, :name, { include_blank: true }, class: 'form-control'
+  .form-group
+    = f.check_box :active
+    = f.label :active
+  .actions.position
+    = link_to 'Back', :back, class: 'btn btn-danger pull-left'
+    = f.submit "Create", class: 'btn btn-primary'

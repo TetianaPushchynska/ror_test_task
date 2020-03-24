@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TestTask</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'%>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#"><%= "Test Task" %></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if user_signed_in? %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item <%= 'active' if current_page?(employees_path) %> ">
+                <a class="nav-link" href="<%= employees_path %>"><%= "All employees" %> <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(departments_path) %> ">
+                <a class="nav-link" href="<%= departments_path %>"><%= "All departments" %> <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search Employee" aria-label="Search Employee">
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <% if user_signed_in? %>
+              <li class="nav-item <%= 'active' if current_page?(edit_user_registration_path) %> ">
+                <%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(destroy_user_session_path) %> ">
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item <%= 'active' if current_page?(new_user_session_path) %> ">
+                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(new_user_registration_path) %> ">
+                <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container main">
+        <div class="row">
+          <div class="col-md-12">
+            <% if notice %>
+              <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

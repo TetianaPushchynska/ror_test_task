@@ -1,0 +1,23 @@
+%h2= "All departments"
+= link_to 'New Department', new_department_path
+
+.row
+  .col-md-12
+    .table-responsive
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th= "ID"
+            %th= "Name"
+            %th= "Actions"
+
+        %tbody
+          - @departments.each do |department|
+            %tr
+              %td= department.id
+              %td= department.name
+              %td
+                %a= link_to "Edit", edit_department_path(department)
+                %a= link_to "Delete", department, method: :delete, data: { confirm: "Are you sure" }
+
+=paginate @departments

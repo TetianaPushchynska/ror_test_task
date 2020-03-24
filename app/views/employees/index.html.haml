@@ -1,0 +1,27 @@
+%h2= "All employees"
+= link_to 'New Employee', new_employee_path
+
+.row
+  .col-md-12
+    .table-responsive
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %th.color= "ID"
+            %th.color= "Name"
+            %th.color= "Active"
+            %th.color= "Department"
+            %th= "Actions"
+
+        %tbody
+          - @employees.each do |employee|
+            %tr
+              %td= employee.id
+              %td= employee.name
+              %td= employee.active == true ? "Yes" : "No"
+              %td= employee.department.name
+              %td
+                %a= link_to "Edit", edit_employee_path(employee)
+                %a= link_to "Delete", employee, method: :delete, data: { confirm: "Are you sure" }
+
+= paginate @employees
