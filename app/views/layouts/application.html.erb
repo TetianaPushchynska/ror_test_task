@@ -28,10 +28,6 @@
 
         <div>
           <ul class="navbar-nav mr-auto">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search Employee" aria-label="Search Employee">
-              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
             <% if user_signed_in? %>
               <li class="nav-item <%= 'active' if current_page?(edit_user_registration_path) %> ">
                 <%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %>

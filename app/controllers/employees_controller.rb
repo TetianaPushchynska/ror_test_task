@@ -3,7 +3,11 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[edit update destroy]
 
   def index
-    @employees = current_user.employees.all.page(params[:page]).per(4)
+    @employees = if params[:search] == '' || params[:search].nil?
+                   current_user.employees.all.page(params[:page]).per(2)
+                 else
+                   current_user.employees.where(name: params[:search]).page(params[:page]).per(2)
+                 end
   end
 
   def new
@@ -41,6 +45,6 @@ class EmployeesController < ApplicationController
   end
 
   def employee_params
-    params.require(:employee).permit(:name, :active, :department_id, :user_id)
+    params.require(:employee).permit(:name, :active, :department_id, :user_id, :search)
   end
 end

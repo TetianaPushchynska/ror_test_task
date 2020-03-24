@@ -1,3 +1,9 @@
+.row.position
+  = form_tag employees_path, method: 'get', class: 'form-inline' do
+    = text_field_tag :search, params[:search], placeholder: "Search Employee", class: 'form-control'
+    = submit_tag("Search", name: nil, class: "btn btn-outline-primary")
+
+
 %h2= "All employees"
 = link_to 'New Employee', new_employee_path
 
